@@ -46,12 +46,12 @@ class DNN(Model):
 
     def train(self, x_train, y_train, x_val=None, y_val=None):
         best_acc = 0
-        for i in xrange(50):
+        for i in range(50):
             # Shuffle the data for each epoch in unison inspired from https://stackoverflow.com/a/4602224
             p = np.random.permutation(len(x_train))
             x_train = x_train[p]
             y_train = y_train[p]
-            self.model.fit(x_train, y_train, batch_size=32, epochs=1)
+            self.model.fit(x_train, y_train, batch_size=256, verbose=1, epochs=1)
             loss, acc = self.model.evaluate(x_val, y_val)
             if acc > best_acc:
                 best_acc = acc

@@ -67,4 +67,4 @@ class NN(MLModel):
         params['name'] = 'Neural Network'
         super(NN, self).__init__(**params)
         self.model = MLPClassifier(activation='logistic', verbose=True,
-                                   hidden_layer_sizes=(512,), batch_size=32)
+                                   hidden_layer_sizes=(512,), batch_size=256)
