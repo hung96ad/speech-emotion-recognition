@@ -42,7 +42,7 @@ def get_data(dataset_path, flatten=True, mfcc_len=39):
     print('curdir', cur_dir)
     os.chdir(dataset_path)
     for i, directory in enumerate(class_labels):
-        print "started reading folder", directory
+        print("started reading folder", directory)
         os.chdir(directory)
         for filename in os.listdir('.'):
             fs, signal = read_wav(filename)
@@ -53,11 +53,11 @@ def get_data(dataset_path, flatten=True, mfcc_len=39):
             if s_len < mslen:
                 pad_len = mslen - s_len
                 pad_rem = pad_len % 2
-                pad_len /= 2
+                pad_len = int(pad_len/2)
                 signal = np.pad(signal, (pad_len, pad_len + pad_rem), 'constant', constant_values=0)
             else:
                 pad_len = s_len - mslen
-                pad_len /= 2
+                pad_len = int(pad_len/2)
                 signal = signal[pad_len:pad_len + mslen]
             mfcc = speechpy.feature.mfcc(signal, fs, num_cepstral=mfcc_len)
 
@@ -67,7 +67,7 @@ def get_data(dataset_path, flatten=True, mfcc_len=39):
             data.append(mfcc)
             labels.append(i)
             cnt += 1
-        print "ended reading folder", directory
+        print("ended reading folder", directory)
         os.chdir('..')
     os.chdir(cur_dir)
     x_train, x_test, y_train, y_test = train_test_split(data, labels, test_size=0.2, random_state=42)

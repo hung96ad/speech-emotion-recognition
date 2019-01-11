@@ -42,7 +42,7 @@ class DNN(Model):
         self.model.save_weights(self.save_path)
 
     def evaluate(self, x_test, y_test):
-        print 'Accuracy =', self.model.evaluate(x_test, y_test)[1]
+        print('Accuracy =', self.model.evaluate(x_test, y_test)[1])
 
     def train(self, x_train, y_train, x_val=None, y_val=None):
         best_acc = 0
